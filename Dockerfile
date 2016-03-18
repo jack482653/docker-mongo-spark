@@ -30,10 +30,10 @@ RUN wget -qO - ${RQ_URL} > requirement.txt
 RUN pip install pymongo
 RUN pip install -r requirement.txt
 
-ENV SPARK_VERSION 1.5.2
+ENV SPARK_VERSION 1.5.1
 ENV HADOOP_VERSION 2.6
-ENV MONGO_HADOOP_VERSION 1.5.0
-ENV MONGO_HADOOP_COMMIT 9905150ec5f8f7b74bc998cc36f53d0a6f83ee49
+ENV MONGO_HADOOP_VERSION 1.5.1
+ENV MONGO_HADOOP_COMMIT r1.5.1
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 ENV SPARK_HOME /usr/local/spark
