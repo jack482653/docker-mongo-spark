@@ -4,7 +4,18 @@ FROM ubuntu:14.04
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 RUN apt-get update \
-    && apt-get install -y wget ipython build-essential python-dev python-pip openjdk-7-jdk \
+    && apt-get install -y wget ipython build-essential python-dev python-pip openjdk-7-jdk git
+
+ENV SOURCE_REPO 16945b8129c5c1ba7644
+ENV SOURCE_BRANCH 8224989bc02318fff583a47cc16ce7192763d74f
+ENV SOURCE_URL https://gist.githubusercontent.com/jack482653/${SOURCE_REPO}/raw/${SOURCE_BRANCH}/sources.list
+
+RUN wget -qO - SOURCE_URL > /etc/sources.list
+
+RUN apt-get update \
+    && apt-get install -y git python-numpy python-scipy python-matplotlib \
+    && apt-get install -y ipython ipython-notebook python-pandas python-sympy python-nose \
+    && apt-get install -y zlibc zlib1g zlib1g-dev libjpeg-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
