@@ -19,7 +19,14 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
+ENV RQ_REPO f5523db44460c1157a2c
+ENV RQ_BRANCH 4f226f2c2f5c9204e45be66945c3c35da4bbebfd
+ENV RQ_URL https://gist.githubusercontent.com/jack482653/${RQ_REPO}/raw/${RQ_BRANCH}/requirement.txt
+
+RUN wget -qO - $(RQ_URL} > requirement.txt
+
 RUN pip install pymongo
+RUN pip install -r requirement.txt
 
 ENV SPARK_VERSION 1.5.2
 ENV HADOOP_VERSION 2.6
@@ -46,6 +53,7 @@ ENV SPARK_DRIVER_EXTRA_CLASSPATH ${MONGO_HADOOP_JAR}:${MONGO_HADOOP_SPARK_JAR}
 ENV CLASSPATH ${SPARK_DRIVER_EXTRA_CLASSPATH}
 ENV JARS ${MONGO_HADOOP_JAR},${MONGO_HADOOP_SPARK_JAR}
 
+ENV PYSPARK_PYTHON /usr/bin/python2.7
 ENV PYSPARK_DRIVER_PYTHON /usr/bin/ipython
 ENV PATH $PATH:$SPARK_HOME/bin
 
@@ -59,6 +67,7 @@ RUN wget -qO - ${MONGO_HADOOP_URL} | tar -xz -C /usr/local/ \
     && ./gradlew jar
 
 RUN echo "spark.driver.extraClassPath   ${CLASSPATH}" > $SPARK_HOME/conf/spark-defaults.conf
+RUN echo -e "SPARK_MASTER_IP=\"${IP}\"\nSPARK_LOCAL_IP=\"${IP}\"\nSPARK_PUBLIC_DNS=\"${IP}\"" > $SPARK_HOME/conf/spark-env.sh
 
 CMD ["/bin/bash"]
 
