@@ -69,7 +69,9 @@ RUN wget -qO - ${MONGO_HADOOP_URL} | tar -xz -C /usr/local/ \
     && ./gradlew jar
 
 RUN echo "spark.driver.extraClassPath   ${CLASSPATH}" > $SPARK_HOME/conf/spark-defaults.conf
-RUN echo -e "SPARK_MASTER_IP=\"${IP}\"\nSPARK_LOCAL_IP=\"${IP}\"\nSPARK_PUBLIC_DNS=\"${IP}\"" > $SPARK_HOME/conf/spark-env.sh
+RUN echo "SPARK_MASTER_IP=\"${IP}\"" > $SPARK_HOME/conf/spark-env.sh
+RUN echo "SPARK_LOCAL_IP=\"${IP}\"" >> $SPARK_HOME/conf/spark-env.sh
+RUN echo "SPARK_PUBLIC_DNS=\"${IP}\"" >> $SPARK_HOME/conf/spark-env.sh
 
 CMD ["/bin/bash"]
 
