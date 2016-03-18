@@ -30,7 +30,7 @@ RUN wget -qO - ${RQ_URL} > requirement.txt
 RUN pip install pymongo
 RUN pip install -r requirement.txt
 
-ENV SPARK_VERSION 1.5.1
+ENV SPARK_VERSION 1.6.1
 ENV HADOOP_VERSION 2.6
 ENV MONGO_HADOOP_VERSION 1.5.1
 ENV MONGO_HADOOP_COMMIT r1.5.1
