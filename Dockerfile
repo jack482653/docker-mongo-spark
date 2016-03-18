@@ -3,6 +3,8 @@ ARG IP
 # See https://github.com/phusion/baseimage-docker/issues/58
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
+RUN sed -i -- 's/http:\/\/archive.ubuntu.com\/ubuntu\//http:\/\/free.nchc.org.tw\/ubuntu\//g' /etc/apt/sources.list
+
 RUN apt-get update \
     && apt-get install -y wget ipython build-essential python-dev python-pip openjdk-7-jdk git
 
