@@ -10,7 +10,7 @@ ENV SOURCE_REPO 16945b8129c5c1ba7644
 ENV SOURCE_BRANCH 8224989bc02318fff583a47cc16ce7192763d74f
 ENV SOURCE_URL https://gist.githubusercontent.com/jack482653/${SOURCE_REPO}/raw/${SOURCE_BRANCH}/sources.list
 
-RUN wget -qO - $(SOURCE_URL} > /etc/sources.list
+RUN wget -qO - ${SOURCE_URL} > /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get install -y git python-numpy python-scipy python-matplotlib \
@@ -23,7 +23,7 @@ ENV RQ_REPO f5523db44460c1157a2c
 ENV RQ_BRANCH 4f226f2c2f5c9204e45be66945c3c35da4bbebfd
 ENV RQ_URL https://gist.githubusercontent.com/jack482653/${RQ_REPO}/raw/${RQ_BRANCH}/requirement.txt
 
-RUN wget -qO - $(RQ_URL} > requirement.txt
+RUN wget -qO - ${RQ_URL} > requirement.txt
 
 RUN pip install pymongo
 RUN pip install -r requirement.txt
