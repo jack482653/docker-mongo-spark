@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-
+ARG IP
 # See https://github.com/phusion/baseimage-docker/issues/58
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
